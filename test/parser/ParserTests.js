@@ -65,3 +65,20 @@ exports.locationEqual = function (loc1, loc2) {
         loc1.end.column === loc2.end.column
     );
 };
+
+/**
+ * Removes least-common leading indentation from a string, effectively "unindenting" a multi-line
+ * template string.
+ * @param {string} str - the string to unindent
+ * @return {string} `str`, but reformatted so that at least one line starts at column 0
+ */
+exports.deindent = function deindent(str) {
+    let lines = str.split("\n");
+    let firstNonEmptyLine = lines.find((line) => line.trim() !== "");
+    if (firstNonEmptyLine == null) {
+        return str;
+    }
+
+    let baseIndent = firstNonEmptyLine.length - firstNonEmptyLine.trim().length;
+    return lines.map((line) => line.substring(baseIndent)).join("\n");
+};

@@ -255,6 +255,11 @@ export class FileCoverage implements Expr.Visitor<BrsType>, Stmt.Visitor<BrsType
         return BrsInvalid.Instance;
     }
 
+    visitTryCatch(statement: Stmt.TryCatch) {
+        // TODO: implement statement/expression coverage for try/catch
+        return BrsInvalid.Instance;
+    }
+
     visitFor(statement: Stmt.For) {
         this.execute(statement.counterDeclaration);
         this.evaluate(statement.counterDeclaration.value);

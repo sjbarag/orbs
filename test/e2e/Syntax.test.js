@@ -216,4 +216,16 @@ describe("end to end syntax", () => {
             "14", // arr = [13]: arr[0]++
         ]);
     });
+
+    test("try-catch.brs", async () => {
+        await execute([resourceFile("try-catch.brs")], outputStreams);
+        expect(allArgs(outputStreams.stdout.write).filter((arg) => arg !== "\n")).toEqual([
+            "[pre_try] a = ",
+            "5",
+            "[in_try] a = ",
+            "10",
+            "[post_try] a = ",
+            "10",
+        ]);
+    });
 });
